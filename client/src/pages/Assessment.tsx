@@ -1,10 +1,8 @@
-import { useState } from "wouter/preact";
+import { useState as useReactState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Brain, ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { useState as useReactState, useEffect } from "react";
+import { Brain, ArrowLeft } from "lucide-react";
 
 const rawQuestions = [
   "I enjoy working with tools, machines, or equipment to build or fix things.",
@@ -64,11 +62,11 @@ const QUESTIONS_PER_PAGE = 5;
 const TOTAL_PAGES = Math.ceil(rawQuestions.length / QUESTIONS_PER_PAGE);
 
 const options = [
-  { value: 1, label: "Strongly Disagree", color: "hover:border-rose-400 hover:bg-rose-50" },
-  { value: 2, label: "Disagree", color: "hover:border-orange-300 hover:bg-orange-50" },
-  { value: 3, label: "Neutral", color: "hover:border-slate-300 hover:bg-slate-50" },
-  { value: 4, label: "Agree", color: "hover:border-emerald-300 hover:bg-emerald-50" },
-  { value: 5, label: "Strongly Agree", color: "hover:border-teal-400 hover:bg-teal-50" }
+  { value: 1, label: "Strongly Disagree" },
+  { value: 2, label: "Disagree" },
+  { value: 3, label: "Neutral" },
+  { value: 4, label: "Agree" },
+  { value: 5, label: "Strongly Agree" }
 ];
 
 export default function Assessment() {
@@ -119,7 +117,6 @@ export default function Assessment() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col text-[#1a1a1a]">
-      {/* Header */}
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/">
@@ -147,7 +144,6 @@ export default function Assessment() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="flex-1 py-16 px-6">
         <div className={`container mx-auto max-w-3xl transition-all duration-300 ${
           isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
@@ -174,7 +170,7 @@ export default function Assessment() {
                           onClick={() => handleOptionSelect(globalIdx, option.value)}
                           className={`
                             px-4 py-3 rounded-xl border-2 text-center transition-all duration-200 text-xs font-bold uppercase tracking-tight
-                            ${isSelected 
+                            \${isSelected 
                               ? 'border-black bg-black text-white' 
                               : 'border-gray-100 bg-gray-50 text-gray-400 hover:border-gray-200 hover:bg-white hover:text-gray-600'
                             }
@@ -190,7 +186,6 @@ export default function Assessment() {
             })}
           </div>
 
-          {/* Navigation Controls */}
           <div className="flex items-center justify-between pt-12 border-t border-gray-100">
             <Button 
               variant="ghost" 
