@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import Assessment from "@/pages/Assessment";
 import Dashboard from "@/pages/Dashboard";
 import NotFound from "@/pages/not-found";
+import { AssessmentProvider } from "./context/AssessmentContext";
 
 function Router() {
   return (
@@ -22,10 +23,12 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <AssessmentProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </AssessmentProvider>
     </QueryClientProvider>
   );
 }

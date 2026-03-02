@@ -1,66 +1,51 @@
 import { Link } from "wouter";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Brain, Download, Share2, Briefcase, GraduationCap, TrendingUp, DollarSign } from "lucide-react";
+import { Brain, Download, Share2, DollarSign, GraduationCap, TrendingUp } from "lucide-react";
 import { 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, 
   ResponsiveContainer, Tooltip as RechartsTooltip 
 } from "recharts";
-
-// Mock Data
-const riasecData = [
-  { subject: 'Realistic', A: 45, fullMark: 100 },
-  { subject: 'Investigative', A: 85, fullMark: 100 },
-  { subject: 'Artistic', A: 65, fullMark: 100 },
-  { subject: 'Social', A: 70, fullMark: 100 },
-  { subject: 'Enterprising', A: 90, fullMark: 100 },
-  { subject: 'Conventional', A: 55, fullMark: 100 },
-];
-
-const traits = [
-  { name: 'Openness', score: 82, color: 'bg-blue-500' },
-  { name: 'Conscientiousness', score: 75, color: 'bg-emerald-500' },
-  { name: 'Extraversion', score: 68, color: 'bg-amber-500' },
-  { name: 'Agreeableness', score: 85, color: 'bg-rose-500' },
-  { name: 'Stability', score: 60, color: 'bg-purple-500' },
-];
-
-const matches = [
-  {
-    title: "Product Manager",
-    category: "Technology / Business",
-    match: 94,
-    salary: "$110k - $160k",
-    education: "Bachelor's Degree",
-    growth: "+10% (Faster than average)",
-    tags: ["Analytical", "Leadership", "Communication"]
-  },
-  {
-    title: "Data Scientist",
-    category: "Technology / Analytics",
-    match: 88,
-    salary: "$100k - $150k",
-    education: "Master's Degree preferred",
-    growth: "+36% (Much faster than average)",
-    tags: ["Analytical", "Numerical", "Problem Solving"]
-  },
-  {
-    title: "UX Researcher",
-    category: "Design / Research",
-    match: 85,
-    salary: "$90k - $130k",
-    education: "Bachelor's Degree",
-    growth: "+23% (Much faster than average)",
-    tags: ["Empathy", "Analytical", "Communication"]
-  }
-];
+import { useAssessment } from "../context/AssessmentContext";
+import { getCareerMatches } from "../utils/careerEngine";
+import { useMemo } from "react";
 
 export default function Dashboard() {
+  const { getResults } = useAssessment();
+  
+  const results = useMemo(() => getResults(), [getResults]);
+  const careerMatches = useMemo(() => getCareerMatches(results), [results]);
+
+  const riasecData = [
+    { subject: 'Realistic', A: results.interest.Realistic || 0, fullMark: 100 },
+    { subject: 'Investigative', A: results.interest.Investigative || 0, fullMark: 100 },
+    { subject: 'Artistic', A: results.interest.Artistic || 0, fullMark: 100 },
+    { subject: 'Social', A: results.interest.Social || 0, fullMark: 100 },
+    { subject: 'Enterprising', A: results.interest.Enterprising || 0, fullMark: 100 },
+    { subject: 'Conventional', A: results.interest.Conventional || 0, fullMark: 100 },
+  ];
+
+  const personalityTraits = [
+    { name: 'Openness', score: results.personality.Openness || 0, color: 'bg-blue-500' },
+    { name: 'Conscientiousness', score: results.personality.Conscientiousness || 0, color: 'bg-emerald-500' },
+    { name: 'Extraversion', score: results.personality.Extraversion || 0, color: 'bg-amber-500' },
+    { name: 'Agreeableness', score: results.personality.Agreeableness || 0, color: 'bg-rose-500' },
+    { name: 'Stability', score: results.personality.Stability || 0, color: 'bg-purple-500' },
+  ];
+
+  const topStrengths = Object.entries(results.strength)
+    .sort(([, a]: any, [, b]: any) => b - a)
+    .slice(0, 3)
+    .map(([name]) => name);
+
+  const coreValues = Object.entries(results.value)
+    .sort(([, a]: any, [, b]: any) => b - a)
+    .slice(0, 3)
+    .map(([name]) => name);
+
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20">
-      {/* Header Navigation */}
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/">
@@ -81,7 +66,6 @@ export default function Dashboard() {
       </header>
 
       <main className="container mx-auto px-4 max-w-6xl mt-8">
-        {/* Dashboard Header */}
         <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <h1 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight mb-2">
             Your Career Blueprint
@@ -92,11 +76,7 @@ export default function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Left Column - Profile (Radar & Traits) */}
           <div className="lg:col-span-1 space-y-8">
-            
-            {/* Interest Profile */}
             <Card className="shadow-md border-none overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
               <CardHeader className="bg-white pb-0">
                 <CardTitle className="text-lg">Interest Profile</CardTitle>
@@ -111,8 +91,8 @@ export default function Dashboard() {
                       <Radar
                         name="Score"
                         dataKey="A"
-                        stroke="var(--color-primary)"
-                        fill="var(--color-primary)"
+                        stroke="hsl(var(--primary))"
+                        fill="hsl(var(--primary))"
                         fillOpacity={0.4}
                       />
                       <RechartsTooltip />
@@ -122,14 +102,13 @@ export default function Dashboard() {
               </CardContent>
             </Card>
 
-            {/* Personality Traits */}
             <Card className="shadow-md border-none animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
               <CardHeader>
                 <CardTitle className="text-lg">Personality Traits</CardTitle>
                 <CardDescription>Big Five Dimensions</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {traits.map((trait) => (
+                {personalityTraits.map((trait) => (
                   <div key={trait.name} className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="font-medium text-slate-700">{trait.name}</span>
@@ -145,13 +124,9 @@ export default function Dashboard() {
                 ))}
               </CardContent>
             </Card>
-
           </div>
 
-          {/* Right Column - Matches & Strengths */}
           <div className="lg:col-span-2 space-y-8">
-            
-            {/* Strengths & Values */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
               <Card className="shadow-md border-none bg-gradient-to-br from-indigo-50 to-white">
                 <CardHeader>
@@ -159,7 +134,7 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {["Analytical Thinking", "Strategic Communication", "Complex Problem Solving"].map(strength => (
+                    {topStrengths.map(strength => (
                       <Badge key={strength} variant="secondary" className="px-3 py-1.5 bg-white text-indigo-700 border-indigo-100 font-medium">
                         {strength}
                       </Badge>
@@ -174,7 +149,7 @@ export default function Dashboard() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {["Achievement", "Innovation", "Autonomy"].map(value => (
+                    {coreValues.map(value => (
                       <Badge key={value} variant="outline" className="px-3 py-1.5 bg-white text-emerald-700 border-emerald-200 font-medium rounded-full">
                         {value}
                       </Badge>
@@ -184,68 +159,46 @@ export default function Dashboard() {
               </Card>
             </div>
 
-            {/* Career Matches */}
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
               <h3 className="text-xl font-bold text-foreground mb-4">Top Career Matches</h3>
-              
-              {matches.map((career, index) => (
+              {careerMatches.slice(0, 5).map((career, index) => (
                 <Card key={index} className="shadow-sm hover:shadow-md transition-shadow border-slate-200 overflow-hidden group">
                   <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <CardContent className="p-6 sm:p-8">
                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                      
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h4 className="text-2xl font-bold text-slate-900">{career.title}</h4>
+                          <h4 className="text-2xl font-bold text-slate-900">{career.name}</h4>
                           <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-200">{career.category}</Badge>
                         </div>
-                        
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-                          <div className="flex items-center text-sm text-slate-600">
-                            <DollarSign className="w-4 h-4 mr-2 text-emerald-500" />
-                            <span>{career.salary}</span>
-                          </div>
-                          <div className="flex items-center text-sm text-slate-600">
-                            <GraduationCap className="w-4 h-4 mr-2 text-blue-500" />
-                            <span>{career.education}</span>
-                          </div>
-                          <div className="flex items-center text-sm text-slate-600">
-                            <TrendingUp className="w-4 h-4 mr-2 text-indigo-500" />
-                            <span>{career.growth}</span>
-                          </div>
-                        </div>
-
                         <div className="mt-6 pt-6 border-t border-slate-100">
-                          <p className="text-sm font-medium text-slate-900 mb-3">Why it fits you:</p>
+                          <p className="text-sm font-medium text-slate-900 mb-3">Key Strengths Needed:</p>
                           <div className="flex flex-wrap gap-2">
-                            {career.tags.map(tag => (
+                            {career.requiredStrengths.map(tag => (
                               <span key={tag} className="text-xs inline-flex items-center px-2.5 py-1 rounded-md bg-slate-50 text-slate-600 border border-slate-200">
-                                Requires: <span className="font-semibold ml-1">{tag}</span>
+                                {tag}
                               </span>
                             ))}
                           </div>
                         </div>
                       </div>
-
                       <div className="flex flex-col items-center justify-center bg-slate-50 rounded-2xl p-6 min-w-[140px] shrink-0 border border-slate-100">
                         <div className="relative">
                           <svg className="w-20 h-20 transform -rotate-90">
                             <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-slate-200" />
-                            <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="transparent" strokeDasharray="226.2" strokeDashoffset={226.2 - (226.2 * career.match) / 100} className="text-primary transition-all duration-1000 ease-out" />
+                            <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="transparent" strokeDasharray="226.2" strokeDashoffset={226.2 - (226.2 * career.matchPercentage) / 100} className="text-primary transition-all duration-1000 ease-out" />
                           </svg>
                           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-black text-slate-900">
-                            {career.match}<span className="text-sm">%</span>
+                            {career.matchPercentage}<span className="text-sm">%</span>
                           </div>
                         </div>
                         <p className="text-xs font-medium text-slate-500 mt-2 uppercase tracking-wide">Match Score</p>
                       </div>
-
                     </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
-
           </div>
         </div>
       </main>
