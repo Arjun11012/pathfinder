@@ -1,215 +1,232 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Target, LineChart, ArrowRight, CheckCircle2 } from "lucide-react";
-import heroImage from "@/assets/images/hero.png";
+import { Brain, ArrowRight, MessageSquare, PenTool, Headphones, BarChart3, Globe, ShieldCheck } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-white text-[#1a1a1a]">
       {/* Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <header className="w-full bg-white/80 backdrop-blur-sm fixed top-0 z-50">
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <Brain className="w-5 h-5 text-primary-foreground" />
+            <div className="w-8 h-8 rounded bg-black flex items-center justify-center">
+              <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="font-heading font-bold text-xl tracking-tight text-foreground">PathFinder</span>
+            <span className="font-bold text-xl tracking-tight">PathFinder</span>
           </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Methodology</Link>
-            <Link href="#how-it-works" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">How it Works</Link>
+          <nav className="hidden md:flex items-center gap-8">
+            <Link href="#features" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">Features</Link>
+            <Link href="#how-it-works" className="text-sm font-medium text-gray-600 hover:text-black transition-colors">How it Works</Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="hidden sm:inline-flex">Log in</Button>
             <Link href="/assessment">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/20 rounded-full px-6">
-                Take Assessment
+              <Button className="bg-black hover:bg-black/90 text-white rounded-md px-6 h-11 text-sm font-semibold">
+                Start Free Trial →
               </Button>
             </Link>
           </div>
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 pt-32">
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-20 pb-32">
-          {/* Background Gradients */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] opacity-30 pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-in fade-in duration-1000"></div>
-            <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-in fade-in duration-1000 delay-300"></div>
+        <section className="container mx-auto px-6 text-center max-w-4xl mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 text-xs font-medium text-gray-600 mb-8 bg-white shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+            Reduce career uncertainty by 85%
           </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
+            Discover engaging careers <br/>instantly ready to explore
+          </h1>
+          
+          <p className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Find key strengths, analyze traits, and discover your path effortlessly. 
+            A workflow with enterprise-grade psychometrics that understands context and delivers.
+          </p>
+          
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link href="/assessment">
+              <Button className="bg-black hover:bg-black/90 text-white rounded-md px-8 h-12 text-sm font-semibold">
+                Start Free Trial →
+              </Button>
+            </Link>
+            <Button variant="ghost" className="text-gray-600 hover:text-black font-semibold h-12">
+              Book A Demo →
+            </Button>
+          </div>
+        </section>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="flex flex-col gap-6 animate-in slide-in-from-bottom-8 duration-700">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary w-fit">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                  </span>
-                  <span className="text-xs font-semibold uppercase tracking-wider">Scientifically Backed</span>
+        {/* Product UI Mockup Grid */}
+        <section className="container mx-auto px-6 mb-32">
+          <div className="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Conversations Card */}
+            <Card className="bg-[#F9FAFB] border-none shadow-sm rounded-2xl overflow-hidden p-8">
+              <p className="text-sm font-medium text-gray-600 mb-12">Always with our live support</p>
+              <div className="flex flex-col items-center text-center">
+                <div className="w-32 h-40 bg-white rounded-2xl shadow-lg border border-gray-100 flex flex-col items-center justify-center mb-6">
+                  <div className="w-3 h-3 rounded-full bg-orange-400 mb-4"></div>
+                  <span className="text-4xl font-bold mb-1">300K</span>
+                  <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Daily Conversations</span>
                 </div>
-                
-                <h1 className="text-5xl lg:text-6xl font-extrabold text-foreground leading-tight">
-                  Discover Your Ideal <br/>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Career Path</span>
-                </h1>
-                
-                <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                  Stop guessing. Use our validated psychometric assessment to uncover your true strengths, personality traits, and the careers where you will naturally thrive.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Link href="/assessment">
-                    <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/25 rounded-full h-14 px-8 text-base">
-                      Start Assessment <ArrowRight className="ml-2 w-5 h-5" />
-                    </Button>
-                  </Link>
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full h-14 px-8 text-base bg-white/50 backdrop-blur hover:bg-white/80">
-                    View Sample Report
-                  </Button>
+                <div className="flex -space-x-2">
+                   {[1,2,3,4].map(i => (
+                     <div key={i} className="w-8 h-8 rounded-full border-2 border-[#F9FAFB] bg-gray-200"></div>
+                   ))}
+                   <div className="w-8 h-8 rounded-full border-2 border-[#F9FAFB] bg-white flex items-center justify-center text-[10px] font-bold text-gray-400">+2</div>
                 </div>
-                
-                <div className="flex items-center gap-4 text-sm text-muted-foreground pt-4">
-                  <div className="flex -space-x-2">
-                    {[1,2,3,4].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full border-2 border-background bg-muted flex items-center justify-center text-[10px] font-bold">
-                        {String.fromCharCode(64+i)}
-                      </div>
-                    ))}
+              </div>
+            </Card>
+
+            {/* AI Assistant Card */}
+            <Card className="bg-white border border-gray-100 shadow-xl rounded-2xl p-8 lg:scale-105 z-10">
+              <div className="flex items-center gap-2 mb-8">
+                <Brain className="w-5 h-5" />
+                <span className="text-sm font-bold">AI Path Assistant</span>
+              </div>
+              <div className="space-y-4">
+                <div className="p-4 bg-gray-50 rounded-xl">
+                  <p className="text-[10px] font-bold text-gray-400 mb-2 uppercase">AI Generated:</p>
+                  <p className="text-xs font-medium mb-4">Transform your career in 30 days! Join thousands who've already achieved their goals.</p>
+                  <div className="flex items-center gap-2 text-xs font-bold">
+                    <ArrowRight className="w-3 h-3" />
+                    Start your free trial today!
                   </div>
-                  <p>Trusted by <span className="font-semibold text-foreground">10,000+</span> students</p>
+                </div>
+                <div className="pt-4 border-t border-gray-100">
+                  <div className="relative">
+                    <input type="text" placeholder="Explore careers for creative..." className="w-full bg-gray-50 border-none rounded-lg py-3 px-4 text-xs pr-12" />
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 bg-orange-500 rounded p-1.5">
+                       <ArrowRight className="w-3 h-3 text-white" />
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <div className="relative lg:h-[600px] flex items-center justify-center animate-in fade-in duration-1000 delay-300">
-                <div className="relative w-full max-w-md aspect-square">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20 rounded-3xl rotate-6 scale-105 transition-transform duration-500"></div>
-                  <img 
-                    src={heroImage} 
-                    alt="Abstract Career Assessment Illustration" 
-                    className="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl shadow-primary/10 border border-white/50"
-                  />
-                  
-                  {/* Floating Elements */}
-                  <Card className="absolute -bottom-6 -left-6 z-20 shadow-xl border-white/50 bg-white/90 backdrop-blur animate-in slide-in-from-bottom-4 duration-700 delay-500">
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent">
-                        <Target className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <p className="text-xs text-muted-foreground font-medium">Top Match</p>
-                        <p className="text-sm font-bold">Product Manager</p>
-                      </div>
-                    </CardContent>
-                  </Card>
+            </Card>
+
+            {/* Support Card */}
+            <Card className="bg-[#F9FAFB] border-none shadow-sm rounded-2xl p-8">
+              <p className="text-sm font-medium text-gray-600 mb-8">Chat with us in Support</p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                   <div className="w-6 h-6 rounded-full bg-gray-200 shrink-0"></div>
+                   <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-[10px]">Hello! How are you?</div>
+                </div>
+                <div className="flex items-start flex-row-reverse gap-3">
+                   <div className="w-6 h-6 rounded-full bg-black shrink-0"></div>
+                   <div className="bg-black text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-[10px]">I'm fine! Can I help you?</div>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section id="features" className="py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Comprehensive Analysis</h2>
-              <p className="text-lg text-muted-foreground">Our methodology goes beyond simple interests, examining the core pillars of professional success.</p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: <Target className="w-8 h-8 text-primary" />,
-                  title: "Interest Profiling",
-                  desc: "Map your natural inclinations against the RIASEC model to find work you genuinely enjoy.",
-                  color: "bg-primary/10"
-                },
-                {
-                  icon: <Brain className="w-8 h-8 text-accent" />,
-                  title: "Personality Analysis",
-                  desc: "Evaluate your Big Five traits to understand your ideal work environment and culture fit.",
-                  color: "bg-accent/10"
-                },
-                {
-                  icon: <LineChart className="w-8 h-8 text-blue-500" />,
-                  title: "Career Matching",
-                  desc: "Our algorithm cross-references your profile with hundreds of careers to find your perfect fit.",
-                  color: "bg-blue-500/10"
-                }
-              ].map((feature, i) => (
-                <Card key={i} className="border-none shadow-lg shadow-slate-200/50 hover:-translate-y-2 transition-all duration-300">
-                  <CardContent className="p-8">
-                    <div className={`w-16 h-16 rounded-2xl ${feature.color} flex items-center justify-center mb-6`}>
-                      {feature.icon}
-                    </div>
-                    <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+        {/* Logos Section */}
+        <section className="container mx-auto px-6 mb-32 text-center">
+          <p className="text-sm font-medium text-gray-400 mb-12">Trusted by leading companies worldwide</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 grayscale opacity-50">
+            <span className="font-bold text-xl">blend</span>
+            <span className="font-bold text-xl">bitpanda</span>
+            <span className="font-bold text-xl italic">hippo</span>
+            <span className="font-bold text-xl">Cerebral</span>
+            <span className="font-bold text-xl">cameo</span>
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section id="how-it-works" className="py-24 bg-slate-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
-              <p className="text-lg text-muted-foreground">Your journey to career clarity in three simple steps.</p>
-            </div>
-            
-            <div className="max-w-4xl mx-auto">
-              <div className="relative">
-                {/* Connecting Line */}
-                <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 -translate-y-1/2 z-0"></div>
-                
-                <div className="grid md:grid-cols-3 gap-8 relative z-10">
-                  {[
-                    { step: "01", title: "Answer Questions", desc: "Take our 15-minute scientific assessment." },
-                    { step: "02", title: "Get Analyzed", desc: "Our system processes your unique profile." },
-                    { step: "03", title: "Explore Careers", desc: "Discover tailored matches and insights." }
-                  ].map((item, i) => (
-                    <div key={i} className="flex flex-col items-center text-center bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                      <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg mb-4 shadow-lg shadow-primary/30">
-                        {item.step}
-                      </div>
-                      <h4 className="text-lg font-bold mb-2">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
+        {/* Features Grid */}
+        <section id="features" className="container mx-auto px-6 mb-32">
+          <h2 className="text-3xl font-bold mb-4">Powerful features for modern guidance</h2>
+          <p className="text-gray-500 mb-16 max-w-xl">From setup to deployment in minutes, our platform handles customer conversations delivers exceptional results.</p>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="bg-white border border-gray-100 p-8 rounded-2xl shadow-sm">
+              <h3 className="font-bold mb-2">Trait Control</h3>
+              <p className="text-sm text-gray-500 mb-8">Choose from friendly, professional</p>
+              <div className="space-y-3">
+                 {['friendly', 'empathetic', 'confident'].map((trait, i) => (
+                   <div key={trait} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                      <div className={`w-6 h-6 rounded bg-orange-${100 * (i+1)}`}></div>
+                      <span className="text-[10px] font-bold text-gray-600">{trait}</span>
+                   </div>
+                 ))}
               </div>
-            </div>
+            </Card>
             
-            <div className="mt-16 text-center">
-              <Link href="/assessment">
-                <Button size="lg" className="bg-foreground hover:bg-foreground/90 text-background rounded-full h-14 px-8 text-base">
-                  Begin Your Journey
-                </Button>
-              </Link>
-            </div>
+            <Card className="bg-white border border-gray-100 p-8 rounded-2xl shadow-sm">
+              <h3 className="font-bold mb-2">SEO Optimization</h3>
+              <p className="text-sm text-gray-500 mb-8">Built-in keyword suggestions to help</p>
+              <div className="space-y-4">
+                 <div className="p-3 bg-gray-50 rounded-lg text-[10px] text-gray-400">Q Search transaction</div>
+                 <div className="space-y-2">
+                    <div className="flex justify-between text-[10px] font-bold">
+                       <span>content optimization</span>
+                       <span>94%</span>
+                    </div>
+                    <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+                       <div className="h-full bg-orange-400 w-[94%]"></div>
+                    </div>
+                 </div>
+              </div>
+            </Card>
+
+            <Card className="bg-white border border-gray-100 p-8 rounded-2xl shadow-sm">
+              <h3 className="font-bold mb-2">Multi-Language</h3>
+              <p className="text-sm text-gray-500 mb-8">Break Language Barriers</p>
+              <div className="space-y-3">
+                 {[
+                   { lang: 'Australian english', flag: '🇦🇺' },
+                   { lang: 'ACanadian English', flag: '🇨🇦' },
+                   { lang: 'American English', flag: '🇺🇸' }
+                 ].map(item => (
+                   <div key={item.lang} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                      <span className="text-lg">{item.flag}</span>
+                      <span className="text-[10px] font-bold text-gray-600">{item.lang}</span>
+                   </div>
+                 ))}
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Pricing/Results Section */}
+        <section className="container mx-auto px-6 mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Simple transparent pricing</h2>
+            <p className="text-gray-500">Choose the plan that fits your needs. Upgrade or downgrade at any time.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+             <Card className="p-10 rounded-3xl border border-gray-100 bg-white">
+                <p className="text-gray-500 mb-8 font-medium">"Our CTR improved by 32% using AI. The AI understands our brand perfectly and generates copy that actually converts."</p>
+                <div className="flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                   <div>
+                      <p className="font-bold text-sm">Sarah Chen</p>
+                      <p className="text-xs text-gray-400">Marketing Director at TechFlow</p>
+                   </div>
+                </div>
+             </Card>
+             <Card className="p-10 rounded-3xl border border-gray-100 bg-white">
+                <p className="text-gray-500 mb-8 font-medium">"We've cut our content creation time in half while doubling our output quality. PathFinder is a game-changer for our agency."</p>
+                <div className="flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                   <div>
+                      <p className="font-bold text-sm">Marcus Rodriguez</p>
+                      <p className="text-xs text-gray-400">Creative Director at BrandCraft</p>
+                   </div>
+                </div>
+             </Card>
           </div>
         </section>
       </main>
 
-      <footer className="bg-white border-t py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Brain className="w-5 h-5 text-primary" />
-              <span className="font-heading font-bold text-lg">PathFinder</span>
-            </div>
-            <div className="flex gap-6 text-sm text-muted-foreground">
-              <a href="#" className="hover:text-foreground transition-colors">Career Guide</a>
-              <a href="#" className="hover:text-foreground transition-colors">Methodology</a>
-              <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-            </div>
-            <p className="text-sm text-muted-foreground">© 2026 PathFinder. All rights reserved.</p>
+      <footer className="bg-[#F9FAFB] border-t py-12">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Brain className="w-5 h-5" />
+            <span className="font-bold text-lg">PathFinder</span>
           </div>
+          <p className="text-sm text-gray-400">© 2026 PathFinder. All rights reserved.</p>
         </div>
       </footer>
     </div>
