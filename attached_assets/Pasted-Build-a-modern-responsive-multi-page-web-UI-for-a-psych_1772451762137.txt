@@ -1,0 +1,244 @@
+Build a modern, responsive multi-page web UI for a psychometric career assessment platform called "PathFinder".
+
+This is design-only. No backend logic. Use placeholder data.
+
+Use:
+
+React (functional components)
+
+Tailwind CSS for styling
+
+Clean, professional, minimal UI
+
+Soft gradients
+
+Card-based layout
+
+Smooth transitions
+
+Mobile responsive
+
+🎨 Brand Style
+
+Theme:
+
+Primary: Indigo / Blue gradient
+
+Accent: Emerald
+
+Background: Very light gray
+
+Cards: White with soft shadow
+
+Rounded corners (xl)
+
+Modern typography
+
+Clean spacing
+
+Dashboard-style layout
+
+Make it feel:
+
+Scientific
+
+Trustworthy
+
+Premium
+
+Student-friendly
+
+Pages To Create
+1️⃣ Landing Page
+
+Sections:
+
+Hero Section
+
+Headline: "Discover Your Ideal Career Path"
+
+Subtext: Short description about scientific career assessment
+
+CTA Button: "Start Assessment"
+
+Clean illustration placeholder (right side)
+
+Gradient background
+
+Features Section
+
+3 cards:
+
+Interest Profiling
+
+Personality Analysis
+
+Career Matching
+
+How It Works
+
+3 steps:
+
+Answer questions
+
+Get analyzed
+
+Explore careers
+
+Footer
+
+Minimal footer with:
+
+Career Guide
+
+Methodology
+
+Privacy Policy
+
+Terms
+
+2️⃣ Assessment Page
+
+Design a question interface:
+
+Top:
+
+Progress bar (e.g., 25% completed)
+
+Question count (Question 5 of 60)
+
+Middle:
+
+Question card centered
+
+5 Likert scale buttons:
+
+Strongly Disagree
+
+Disagree
+
+Neutral
+
+Agree
+
+Strongly Agree
+
+Buttons styled as selectable pills.
+
+Bottom:
+
+Previous button
+
+Next button
+
+Make it feel clean and focused.
+
+3️⃣ Results Dashboard Page
+
+Design inspired by a professional psychometric report.
+
+Sections:
+
+Header
+
+Title: "Your Career Blueprint"
+
+Subtitle text
+
+Section 1: Interest Profile (RIASEC)
+
+Radar chart placeholder
+
+6 labeled categories:
+
+Realistic
+
+Investigative
+
+Artistic
+
+Social
+
+Enterprising
+
+Conventional
+
+Use placeholder percentages.
+
+Section 2: Personality Traits
+
+Big Five displayed as horizontal progress bars:
+
+Openness
+
+Conscientiousness
+
+Extraversion
+
+Agreeableness
+
+Stability
+
+Section 3: Top Strengths
+
+Display top 3 strengths as badge cards
+
+Example:
+
+Analytical
+
+Communication
+
+Numerical
+
+Section 4: Core Values
+
+Display as pill badges:
+
+Achievement
+
+Independence
+
+Recognition
+
+Section 5: Top Career Matches
+
+Create career cards showing:
+
+Career Title
+
+Category Tag (Engineering, Technology, Creative)
+
+Match Percentage (large bold number)
+
+Salary Range
+
+Education Required
+
+Growth Outlook
+
+"Why It Fits You" section with tags:
+
+Requires: Analytical
+
+Requires: Numerical
+
+Requires: Technical
+
+Design it as clean modern dashboard cards.
+
+Extra Requirements
+
+Add subtle hover animations
+
+Add soft fade-in transitions
+
+Use consistent spacing system
+
+Make it fully responsive
+
+Use placeholder chart component if needed
+
+Do not implement real data logic yet
+
+This is only UI design for a psychometric assessment SaaS product.
