@@ -1,0 +1,254 @@
+import { Link } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Brain, Download, Share2, Briefcase, GraduationCap, TrendingUp, DollarSign } from "lucide-react";
+import { 
+  Radar, RadarChart, PolarGrid, PolarAngleAxis, 
+  ResponsiveContainer, Tooltip as RechartsTooltip 
+} from "recharts";
+
+// Mock Data
+const riasecData = [
+  { subject: 'Realistic', A: 45, fullMark: 100 },
+  { subject: 'Investigative', A: 85, fullMark: 100 },
+  { subject: 'Artistic', A: 65, fullMark: 100 },
+  { subject: 'Social', A: 70, fullMark: 100 },
+  { subject: 'Enterprising', A: 90, fullMark: 100 },
+  { subject: 'Conventional', A: 55, fullMark: 100 },
+];
+
+const traits = [
+  { name: 'Openness', score: 82, color: 'bg-blue-500' },
+  { name: 'Conscientiousness', score: 75, color: 'bg-emerald-500' },
+  { name: 'Extraversion', score: 68, color: 'bg-amber-500' },
+  { name: 'Agreeableness', score: 85, color: 'bg-rose-500' },
+  { name: 'Stability', score: 60, color: 'bg-purple-500' },
+];
+
+const matches = [
+  {
+    title: "Product Manager",
+    category: "Technology / Business",
+    match: 94,
+    salary: "$110k - $160k",
+    education: "Bachelor's Degree",
+    growth: "+10% (Faster than average)",
+    tags: ["Analytical", "Leadership", "Communication"]
+  },
+  {
+    title: "Data Scientist",
+    category: "Technology / Analytics",
+    match: 88,
+    salary: "$100k - $150k",
+    education: "Master's Degree preferred",
+    growth: "+36% (Much faster than average)",
+    tags: ["Analytical", "Numerical", "Problem Solving"]
+  },
+  {
+    title: "UX Researcher",
+    category: "Design / Research",
+    match: 85,
+    salary: "$90k - $130k",
+    education: "Bachelor's Degree",
+    growth: "+23% (Much faster than average)",
+    tags: ["Empathy", "Analytical", "Communication"]
+  }
+];
+
+export default function Dashboard() {
+  return (
+    <div className="min-h-screen bg-slate-50/50 pb-20">
+      {/* Header Navigation */}
+      <header className="bg-white border-b sticky top-0 z-50">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <Link href="/">
+            <div className="flex items-center gap-2 cursor-pointer">
+              <Brain className="w-5 h-5 text-primary" />
+              <span className="font-heading font-bold text-lg">PathFinder</span>
+            </div>
+          </Link>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="sm" className="hidden sm:flex">
+              <Share2 className="w-4 h-4 mr-2" /> Share
+            </Button>
+            <Button size="sm" className="bg-primary">
+              <Download className="w-4 h-4 mr-2" /> Export PDF
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-4 max-w-6xl mt-8">
+        {/* Dashboard Header */}
+        <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight mb-2">
+            Your Career Blueprint
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Based on your responses, we've identified your core traits and optimal career paths.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Left Column - Profile (Radar & Traits) */}
+          <div className="lg:col-span-1 space-y-8">
+            
+            {/* Interest Profile */}
+            <Card className="shadow-md border-none overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-500 delay-100">
+              <CardHeader className="bg-white pb-0">
+                <CardTitle className="text-lg">Interest Profile</CardTitle>
+                <CardDescription>RIASEC Model Assessment</CardDescription>
+              </CardHeader>
+              <CardContent className="pt-6 bg-white flex justify-center">
+                <div className="w-full aspect-square max-w-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart cx="50%" cy="50%" outerRadius="70%" data={riasecData}>
+                      <PolarGrid stroke="#e2e8f0" />
+                      <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 12, fontWeight: 500 }} />
+                      <Radar
+                        name="Score"
+                        dataKey="A"
+                        stroke="var(--color-primary)"
+                        fill="var(--color-primary)"
+                        fillOpacity={0.4}
+                      />
+                      <RechartsTooltip />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Personality Traits */}
+            <Card className="shadow-md border-none animate-in fade-in slide-in-from-bottom-4 duration-500 delay-150">
+              <CardHeader>
+                <CardTitle className="text-lg">Personality Traits</CardTitle>
+                <CardDescription>Big Five Dimensions</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {traits.map((trait) => (
+                  <div key={trait.name} className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium text-slate-700">{trait.name}</span>
+                      <span className="font-bold text-slate-900">{trait.score}%</span>
+                    </div>
+                    <div className="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full ${trait.color} rounded-full transition-all duration-1000 ease-out`}
+                        style={{ width: `${trait.score}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+          </div>
+
+          {/* Right Column - Matches & Strengths */}
+          <div className="lg:col-span-2 space-y-8">
+            
+            {/* Strengths & Values */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
+              <Card className="shadow-md border-none bg-gradient-to-br from-indigo-50 to-white">
+                <CardHeader>
+                  <CardTitle className="text-lg text-indigo-900">Top Strengths</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {["Analytical Thinking", "Strategic Communication", "Complex Problem Solving"].map(strength => (
+                      <Badge key={strength} variant="secondary" className="px-3 py-1.5 bg-white text-indigo-700 border-indigo-100 font-medium">
+                        {strength}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="shadow-md border-none bg-gradient-to-br from-emerald-50 to-white">
+                <CardHeader>
+                  <CardTitle className="text-lg text-emerald-900">Core Values</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {["Achievement", "Innovation", "Autonomy"].map(value => (
+                      <Badge key={value} variant="outline" className="px-3 py-1.5 bg-white text-emerald-700 border-emerald-200 font-medium rounded-full">
+                        {value}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Career Matches */}
+            <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300">
+              <h3 className="text-xl font-bold text-foreground mb-4">Top Career Matches</h3>
+              
+              {matches.map((career, index) => (
+                <Card key={index} className="shadow-sm hover:shadow-md transition-shadow border-slate-200 overflow-hidden group">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <CardContent className="p-6 sm:p-8">
+                    <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                      
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4 className="text-2xl font-bold text-slate-900">{career.title}</h4>
+                          <Badge className="bg-slate-100 text-slate-700 hover:bg-slate-200">{career.category}</Badge>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+                          <div className="flex items-center text-sm text-slate-600">
+                            <DollarSign className="w-4 h-4 mr-2 text-emerald-500" />
+                            <span>{career.salary}</span>
+                          </div>
+                          <div className="flex items-center text-sm text-slate-600">
+                            <GraduationCap className="w-4 h-4 mr-2 text-blue-500" />
+                            <span>{career.education}</span>
+                          </div>
+                          <div className="flex items-center text-sm text-slate-600">
+                            <TrendingUp className="w-4 h-4 mr-2 text-indigo-500" />
+                            <span>{career.growth}</span>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 pt-6 border-t border-slate-100">
+                          <p className="text-sm font-medium text-slate-900 mb-3">Why it fits you:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {career.tags.map(tag => (
+                              <span key={tag} className="text-xs inline-flex items-center px-2.5 py-1 rounded-md bg-slate-50 text-slate-600 border border-slate-200">
+                                Requires: <span className="font-semibold ml-1">{tag}</span>
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center justify-center bg-slate-50 rounded-2xl p-6 min-w-[140px] shrink-0 border border-slate-100">
+                        <div className="relative">
+                          <svg className="w-20 h-20 transform -rotate-90">
+                            <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="transparent" className="text-slate-200" />
+                            <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="8" fill="transparent" strokeDasharray="226.2" strokeDashoffset={226.2 - (226.2 * career.match) / 100} className="text-primary transition-all duration-1000 ease-out" />
+                          </svg>
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-black text-slate-900">
+                            {career.match}<span className="text-sm">%</span>
+                          </div>
+                        </div>
+                        <p className="text-xs font-medium text-slate-500 mt-2 uppercase tracking-wide">Match Score</p>
+                      </div>
+
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
